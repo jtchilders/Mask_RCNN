@@ -4,10 +4,11 @@ Pillow
 cython
 matplotlib
 scikit-image
-tensorflow==1.15.0
+tensorflow==1.13.1
 keras==2.3.1
 opencv-python
 imageio
 h5py==2.10.0
 imgaug
+pycocotools
 IPython[all]
