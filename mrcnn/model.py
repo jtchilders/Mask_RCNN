@@ -1835,6 +1835,14 @@ class MaskRCNN():
         self.model_dir = model_dir
         self.set_log_dir()
         self.keras_model = self.build(mode=mode, config=config)
+        print('gpu avail: ',tf.test.is_gpu_available())
+        config = tf.ConfigProto()
+        config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
+        config.log_device_placement = True
+        sess = tf.Session(config=config)
+        sess.as_default()
+        keras.backend.tensorflow_backend.set_session(sess)
+        print('session config: ',K.get_session()._config)
 
     def build(self, mode, config):
         """Build Mask R-CNN architecture.
