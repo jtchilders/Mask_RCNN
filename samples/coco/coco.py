@@ -86,6 +86,8 @@ class CocoConfig(Config):
     # Number of classes (including background)
     NUM_CLASSES = 1 + 80  # COCO has 80 classes
 
+    BACKBONE = "resnet50"
+
 
 ############################################################
 #  Dataset
@@ -460,6 +462,8 @@ if __name__ == '__main__':
     # Select weights file to load
     if args.model.lower() == "coco":
         model_path = COCO_MODEL_PATH
+    elif args.model.lower() == "new":
+        model_path = None
     elif args.model.lower() == "last":
         # Find last trained weights
         model_path = model.find_last()
@@ -470,8 +474,9 @@ if __name__ == '__main__':
         model_path = args.model
 
     # Load weights
-    print("Loading weights ", model_path)
-    model.load_weights(model_path, by_name=True)
+    if model_path is not None:
+        print("Loading weights ", model_path)
+        model.load_weights(model_path, by_name=True)
 
     # Train or evaluate
     if args.command == "train":
